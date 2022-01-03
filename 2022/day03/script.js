@@ -223,10 +223,13 @@ on.load(() => {
 	}
 
 	context.fillStyle = Colour.Black
+	context.fillRect(0, 0, canvas.width, canvas.height)
 	show.tick = () => {
 
 		context.save()
+		context.globalAlpha = 0.1
 		context.fillRect(0, 0, canvas.width, canvas.height)
+		context.globalAlpha = 1.0
 
 		// Zoom
 		context.translate(canvas.width/2, canvas.height/2)
