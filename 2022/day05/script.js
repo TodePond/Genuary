@@ -2,10 +2,15 @@
 const red = document.createElement("img")
 red.src = "red.png"
 
+
 on.load(() => {
 	
 	const show = Show.start()
 	const {context, canvas} = show
+
+	
+	let prevMouse = canvas.width/2
+	let touchMode = false
 
 	const PAD_Y = 0.9
 	const PAD_DDX = 0.1
@@ -81,7 +86,19 @@ on.load(() => {
 		//context.globalAlpha = 1.0
 
 		// Pad
-		const mx = Mouse.position[0] !== undefined? Mouse.position[0] : canvas.width/2
+		let mx = 0
+		if (Touches.length > 0) {
+			mx = Touches[0].position[0]
+			prevMouse = mx
+			touchMode = true
+		}
+		else if (!touchMode) {
+			mx = Mouse.position[0] !== undefined? Mouse.position[0] : prevMouse
+		}
+		else {
+			mx = prevMouse
+		}
+		prevMouse = mx
 		const distanceToMouse = mx - pad.x - PAD_WIDTH/2
 		pad.dx = distanceToMouse * PAD_DDX
 		pad.x += pad.dx
