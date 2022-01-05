@@ -221,7 +221,7 @@ on.load(() => {
 		context.restore()
 
 	}
-
+	
 	context.fillStyle = Colour.Black
 	context.fillRect(0, 0, canvas.width, canvas.height)
 	show.tick = () => {
